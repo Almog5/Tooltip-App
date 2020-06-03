@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tooltip-nipendo"
+    }
+  },
+  "defaultProject": "tooltip-nipendo",
+  "cli": {
+    "analytics": "731e833c-234d-4761-b433-2051df15a4b4"
+  }
 }
