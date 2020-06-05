@@ -11,7 +11,7 @@ export class TooltipDirective {
     clicked: boolean = false;
     tooltip: HTMLElement;
     offset = 10;
-    
+
     constructor(private elRef: ElementRef, private renderer: Renderer2) {
 
     }
@@ -20,17 +20,17 @@ export class TooltipDirective {
     @HostListener('click') onclick(eventData: Event) {
         this.clicked = true;
         console.log("hello from tooltip directive");
-        if (!this.tooltip) { this.show(); }
-
+        //if (!this.tooltip) { this.show(); }
+        !this.tooltip && this.show();
     }
 
     show() {
-        console.log("helloe from show()")
+        console.log("hello from show()")
         this.create();
         this.setPosition();
         this.renderer.addClass(this.tooltip, 'ng-tooltip-show');
         this.onScroll(event) // on click check if tooltip is already out of range,
-                             // if thescreen is alredy scrolled down
+        // if thescreen is alredy scrolled down
     }
 
     hide() {
@@ -56,19 +56,22 @@ export class TooltipDirective {
         //this.renderer.appendChild(document.body, this.tooltip);
         this.renderer.appendChild(this.elRef.nativeElement, this.tooltip);
 
-        this.renderer.addClass(this.tooltip, 'ng-tooltip');
+        
+        this.renderer.addClass(this.tooltip, `ng-tooltip`);
         this.renderer.addClass(this.tooltip, `ng-tooltip-${this.placement}`);
+
         // delay
         this.renderer.setStyle(this.tooltip, '-webkit-transition', `opacity ${this.delay}ms`);
         this.renderer.setStyle(this.tooltip, '-moz-transition', `opacity ${this.delay}ms`);
         this.renderer.setStyle(this.tooltip, '-o-transition', `opacity ${this.delay}ms`);
         this.renderer.setStyle(this.tooltip, 'transition', `opacity ${this.delay}ms`);
-
+    
     }
 
     setPosition() {
         console.log("hello from setPosition()")
         const hostPos = this.elRef.nativeElement.getBoundingClientRect();
+    
         const tooltipPos = this.tooltip.getBoundingClientRect();
         // window scroll top
         const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -84,6 +87,7 @@ export class TooltipDirective {
             left = hostPos.left + (hostPos.width - tooltipPos.width) / 2;
         }
 
+        this.renderer.addClass(this.tooltip, `ng-tooltip-${this.placement}`);
         this.renderer.setStyle(this.tooltip, 'top', `${top + scrollPos}px`);
         this.renderer.setStyle(this.tooltip, 'left', `${left}px`);
     }
@@ -98,17 +102,19 @@ export class TooltipDirective {
         }
     }
 
-    @HostListener('window:scroll', ['$event']) 
+    @HostListener('window:scroll', ['$event'])
     onScroll(event) {
         console.log("from onscroll()")
         if (this.clicked == true) {
 
             if (this.tooltip.offsetTop <= window.pageYOffset) {
                 console.log("hey' you out of range !")
+                this.renderer.removeClass(this.tooltip, `ng-tooltip-${this.placement}`);
                 this.placement = 'bottom'
                 this.setPosition()
             }
             else {
+                this.renderer.removeClass(this.tooltip, `ng-tooltip-${this.placement}`);
                 this.placement = 'top'
                 this.setPosition()
             }
