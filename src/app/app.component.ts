@@ -17,13 +17,12 @@ export class AppComponent {
     console.log("hello from access")
     this.access = !this.access
     if (this.access == true) {
-      document.body.style.backgroundColor = "#000000bf"
-      document.body.style.color = "white"  
+      this.renderer.setStyle(this.elRef.nativeElement.ownerDocument.body,'backgroundColor', "#000000bf",)
+      this.renderer.setStyle(this.elRef.nativeElement.ownerDocument.body,'color', "white")
     }
     else {
-      document.body.style.backgroundColor = "white"
-      document.body.style.color = "black"
-      
+      this.renderer.setStyle(this.elRef.nativeElement.ownerDocument.body,'backgroundColor', "white")
+      this.renderer.setStyle(this.elRef.nativeElement.ownerDocument.body,'color', "black")
     }
   }
 }

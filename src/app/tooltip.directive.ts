@@ -24,6 +24,7 @@ export class TooltipDirective {
 
     show() {
         console.log("hello from show()")
+        this.TopOrButtom();
         this.create();
         this.setPosition();
         this.renderer.addClass(this.tooltip, 'ng-tooltip-show');
@@ -53,7 +54,7 @@ export class TooltipDirective {
         );
         this.renderer.appendChild(this.elRef.nativeElement, this.tooltip);
 
-        
+
         this.renderer.addClass(this.tooltip, `ng-tooltip`);
         this.renderer.addClass(this.tooltip, `ng-tooltip-${this.placement}`);
 
@@ -62,13 +63,13 @@ export class TooltipDirective {
         this.renderer.setStyle(this.tooltip, '-moz-transition', `opacity ${this.delay}ms`);
         this.renderer.setStyle(this.tooltip, '-o-transition', `opacity ${this.delay}ms`);
         this.renderer.setStyle(this.tooltip, 'transition', `opacity ${this.delay}ms`);
-    
+
     }
 
     setPosition() {
         console.log("hello from setPosition()")
         const hostPos = this.elRef.nativeElement.getBoundingClientRect();
-    
+
         const tooltipPos = this.tooltip.getBoundingClientRect();
         // window scroll top
         const scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -122,6 +123,10 @@ export class TooltipDirective {
         if (this.clicked == true) {
             this.hide()
         }
+    }
+
+    TopOrButtom() {
+        this.placement = this.elRef.nativeElement.pageYOffset - 50 <= window.pageYOffset ? "buttom" : "top";
     }
 
 }
