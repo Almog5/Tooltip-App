@@ -5,7 +5,6 @@ import { Directive, Input, HostListener, ElementRef, Renderer2 } from "@angular/
     selector: '[tooltip]',
 })
 export class TooltipDirective {
-    //@Input('tooltip') tooltipTitle: string;
     @Input() placement: string;
     @Input() delay: number;
     clicked: boolean = false;
@@ -20,7 +19,6 @@ export class TooltipDirective {
     @HostListener('click') onclick(eventData: Event) {
         this.clicked = true;
         console.log("hello from tooltip directive");
-        //if (!this.tooltip) { this.show(); }
         !this.tooltip && this.show();
     }
 
@@ -53,7 +51,6 @@ export class TooltipDirective {
             this.tooltip,
             this.renderer.createText("hey i am tooltip") // tooltip textNode
         );
-        //this.renderer.appendChild(document.body, this.tooltip);
         this.renderer.appendChild(this.elRef.nativeElement, this.tooltip);
 
         
