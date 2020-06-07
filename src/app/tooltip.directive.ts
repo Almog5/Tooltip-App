@@ -104,14 +104,14 @@ export class TooltipDirective {
     onScroll(event) {
         console.log("from onscroll()")
         if (this.clicked == true) {
-
-            if (this.tooltip.offsetTop <= window.pageYOffset) {
+            
+            if (this.elRef.nativeElement.offsetTop - window.pageYOffset <= 65 && this.placement == "top") {
                 console.log("hey' you out of range !")
                 this.renderer.removeClass(this.tooltip, `ng-tooltip-${this.placement}`);
                 this.placement = 'bottom'
                 this.setPosition()
             }
-            else {
+            else if (this.elRef.nativeElement.offsetTop - window.pageYOffset > 65 && this.placement == "bottom") {
                 this.renderer.removeClass(this.tooltip, `ng-tooltip-${this.placement}`);
                 this.placement = 'top'
                 this.setPosition()
