@@ -126,7 +126,7 @@ export class TooltipDirective {
     }
 
     TopOrButtom() {
-        this.placement = this.elRef.nativeElement.pageYOffset - 65 <= window.pageYOffset ? "buttom" : "top";
+        this.placement = this.elRef.nativeElement.pageYOffset - 65 <= window.pageYOffset ? "bottom" : "top";
     }
 
 }
