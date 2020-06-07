@@ -3,6 +3,10 @@ button{
     color:black !important;
     box-shadow: 5px 5px 5px gray;
 }
+
+.loremF{
+    margin-top: 10px;
+}
 .accessBtn{
     display: inline-block;
     border: 1px solid gray;

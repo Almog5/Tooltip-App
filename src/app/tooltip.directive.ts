@@ -33,7 +33,7 @@ export class TooltipDirective {
     }
 
     hide() {
-        if (this.clicked == true) {
+        if (this.clicked == true && this.tooltip !== null) {
             this.renderer.removeClass(this.tooltip, 'ng-tooltip-show');
             window.setTimeout(() => {
                 this.renderer.removeChild(this.elRef.nativeElement, this.tooltip);
@@ -104,7 +104,7 @@ export class TooltipDirective {
     onScroll(event) {
         console.log("from onscroll()")
         if (this.clicked == true) {
-            
+
             if (this.elRef.nativeElement.offsetTop - window.pageYOffset <= 65 && this.placement == "top") {
                 console.log("hey' you out of range !")
                 this.renderer.removeClass(this.tooltip, `ng-tooltip-${this.placement}`);
@@ -126,7 +126,7 @@ export class TooltipDirective {
     }
 
     TopOrButtom() {
-        this.placement = this.elRef.nativeElement.pageYOffset - 50 <= window.pageYOffset ? "buttom" : "top";
+        this.placement = this.elRef.nativeElement.pageYOffset - 65 <= window.pageYOffset ? "buttom" : "top";
     }
 
 }
